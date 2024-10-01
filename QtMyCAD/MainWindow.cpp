@@ -18,6 +18,12 @@ MainWindow::MainWindow(QWidget* parent) : QMainWindow(parent) {
 
     // Configure MDI Area to use tabs for subwindows
     mdiArea->setViewMode(QMdiArea::TabbedView);   // Enable tabbed view
+    auto tab = mdiArea->findChild<QTabBar*>();
+    if (tab) {
+        tab->setTabsClosable(true);
+        // The tabs might be very wide
+        tab->setExpanding(false);
+    }
     mdiArea->setTabsClosable(true);               // Add close buttons to tabs
     mdiArea->setTabsMovable(true);                // Allow reordering of tabs
     mdiArea->setTabShape(QTabWidget::Triangular);    // Set rounded tabs, could also be 'QTabWidget::Triangular'

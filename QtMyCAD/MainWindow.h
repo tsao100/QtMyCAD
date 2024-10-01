@@ -7,6 +7,7 @@
 #include <QMdiArea>
 #include <QApplication>
 #include <QTabWidget>
+#include <QTabBar.h>
 #include <QMdiSubWindow>
 #include <QOpenGLWidget>
 #include <QVBoxLayout>
