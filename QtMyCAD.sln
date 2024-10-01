@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.11.35312.102
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "QtMyCAD", "QtMyCAD\QtMyCAD.vcxproj", "{B87C8F46-ED9D-4A0B-B8D8-F5AFB90C5510}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TIM", "TIM\TIM.vcxproj", "{46E523BF-2C9C-462D-83D3-0165D6270EAF}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Release|x64 = Release|x64
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B87C8F46-ED9D-4A0B-B8D8-F5AFB90C5510}.Debug|x64.ActiveCfg = Debug|x64
+		{B87C8F46-ED9D-4A0B-B8D8-F5AFB90C5510}.Debug|x64.Build.0 = Debug|x64
+		{B87C8F46-ED9D-4A0B-B8D8-F5AFB90C5510}.Release|x64.ActiveCfg = Release|x64
+		{B87C8F46-ED9D-4A0B-B8D8-F5AFB90C5510}.Release|x64.Build.0 = Release|x64
+		{46E523BF-2C9C-462D-83D3-0165D6270EAF}.Debug|x64.ActiveCfg = Debug|x64
+		{46E523BF-2C9C-462D-83D3-0165D6270EAF}.Debug|x64.Build.0 = Debug|x64
+		{46E523BF-2C9C-462D-83D3-0165D6270EAF}.Release|x64.ActiveCfg = Release|x64
+		{46E523BF-2C9C-462D-83D3-0165D6270EAF}.Release|x64.Build.0 = Release|x64
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {7D6230AB-7710-4090-A858-FCBCA4A0F800}
+	EndGlobalSection
+EndGlobal
