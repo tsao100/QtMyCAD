@@ -7,6 +7,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "QtMyCAD", "QtMyCAD\QtMyCAD.
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TIM", "TIM\TIM.vcxproj", "{46E523BF-2C9C-462D-83D3-0165D6270EAF}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "QtTest", "QtTest\QtTest.vcxproj", "{EDFE1A3A-941E-4675-B1D0-B944BDF54BBE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -21,6 +23,10 @@ Global
 		{46E523BF-2C9C-462D-83D3-0165D6270EAF}.Debug|x64.Build.0 = Debug|x64
 		{46E523BF-2C9C-462D-83D3-0165D6270EAF}.Release|x64.ActiveCfg = Release|x64
 		{46E523BF-2C9C-462D-83D3-0165D6270EAF}.Release|x64.Build.0 = Release|x64
+		{EDFE1A3A-941E-4675-B1D0-B944BDF54BBE}.Debug|x64.ActiveCfg = Debug|x64
+		{EDFE1A3A-941E-4675-B1D0-B944BDF54BBE}.Debug|x64.Build.0 = Debug|x64
+		{EDFE1A3A-941E-4675-B1D0-B944BDF54BBE}.Release|x64.ActiveCfg = Release|x64
+		{EDFE1A3A-941E-4675-B1D0-B944BDF54BBE}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
