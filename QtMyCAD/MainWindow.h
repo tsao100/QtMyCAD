@@ -2,7 +2,9 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <QPlainTextEdit>
 #include <QTextEdit>
+#include <QDockWidget>
 #include <QSplitter>
 #include <QMdiArea>
 #include <QApplication>
@@ -20,8 +22,14 @@ public:
     MainWindow(QWidget* parent = nullptr);
     ~MainWindow();
 
+    // Create the dockable window
+    void createDockableWindow();
+
 private:
-    QTextEdit* commandWindow;
+    QDockWidget* dockableWindow;
+    QSplitter* CMDsplitter;
+
+    QPlainTextEdit* commandWindow;
     QMdiArea* mdiArea;
     QSplitter* splitter;
     OpenGLWidget* openGLWidget;

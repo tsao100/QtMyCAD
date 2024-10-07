@@ -8,11 +8,14 @@ MainWindow::MainWindow(QWidget* parent) : QMainWindow(parent) {
     QSplitter* verticalSplitter = new QSplitter(Qt::Vertical, mainSplitter);
 
     // Property Window in the west (left) position
-    QTextEdit* propertyWindow = new QTextEdit(this);
+    QPlainTextEdit* propertyWindow = new QPlainTextEdit(this);
     propertyWindow->setPlaceholderText("Property Window");
 
-    commandWindow = new QTextEdit(this);
-    commandWindow->setPlaceholderText("Command Window");
+    commandWindow = new QPlainTextEdit(this);
+    //commandWindow->setPlaceholderText("Command Window");
+    commandWindow->setReadOnly(true);
+    commandWindow->setUndoRedoEnabled(false);
+    commandWindow->appendPlainText("command:"); // Ready for new commands
 
     mdiArea = new QMdiArea(this);
 
@@ -48,7 +51,39 @@ MainWindow::MainWindow(QWidget* parent) : QMainWindow(parent) {
 
     setWindowTitle("QtMyCAD");
     resize(800, 600);
+
+    // Create the dockable window
+    createDockableWindow();
 }
 
 MainWindow::~MainWindow() {
+}
+
+void MainWindow::createDockableWindow()
+{
+    // Create a dock widget
+    dockableWindow = new QDockWidget(tr("Command and Logs"), this);
+    dockableWindow->setAllowedAreas(Qt::BottomDockWidgetArea | Qt::LeftDockWidgetArea | Qt::RightDockWidgetArea);
+
+    // Create a splitter to split the command and logs vertically
+    CMDsplitter = new QSplitter(Qt::Vertical, dockableWindow);
+
+    // Add tabs: Command and Logs
+    QTextEdit* commandTextEdit = new QTextEdit();
+    commandTextEdit->setPlaceholderText("Enter command here...");
+
+    QTextEdit* logsTextEdit = new QTextEdit();
+    logsTextEdit->setReadOnly(true);
+    logsTextEdit->setPlainText("Logs will appear here...");
+
+    // Add the command and logs windows to the splitter
+    CMDsplitter->addWidget(logsTextEdit);
+    CMDsplitter->addWidget(commandTextEdit);
+
+    // Set the QTabWidget as the main widget for the dock
+    dockableWindow->setWidget(CMDsplitter);
+
+    // Add the dock widget to the main window at the bottom
+    addDockWidget(Qt::BottomDockWidgetArea, dockableWindow);
+
 }
