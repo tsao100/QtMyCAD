@@ -1,7 +1,8 @@
 #include "OpenGLWidget.h"
 #include <GL/glu.h> // You may need to install or link GLU depending on your system
 
-OpenGLWidget::OpenGLWidget(QWidget* parent) : QOpenGLWidget(parent) {
+OpenGLWidget::OpenGLWidget(QWidget* parent) : QOpenGLWidget(parent), 
+point1Set(false), point2Set(false) {
 }
 
 OpenGLWidget::~OpenGLWidget() {
@@ -31,7 +32,7 @@ void OpenGLWidget::paintGL() {
     //);
 
     // Draw primitives
-    drawPrimitives();
+    //drawPrimitives();
 }
 
 void OpenGLWidget::resizeGL(int w, int h) {

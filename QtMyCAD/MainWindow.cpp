@@ -49,11 +49,16 @@ MainWindow::MainWindow(QWidget* parent) : QMainWindow(parent) {
 
     setCentralWidget(mainSplitter);
 
+
     setWindowTitle("QtMyCAD");
     resize(800, 600);
 
     // Create the dockable window
     createDockableWindow();
+    connect(commandTextEdit, &QTextEdit::textChanged, this, &MainWindow::handleCommandInput);
+    connect(openGLWidget, &OpenGLWidget::pointPicked, this, &MainWindow::handlePointPicked);
+    connect(openGLWidget2, &OpenGLWidget::pointPicked, this, &MainWindow::handlePointPicked);
+    connect(openGLWidget, &OpenGLWidget::repeatLineCommand, this, &MainWindow::repeatLineCommand);
 }
 
 MainWindow::~MainWindow() {
@@ -69,10 +74,10 @@ void MainWindow::createDockableWindow()
     CMDsplitter = new QSplitter(Qt::Vertical, dockableWindow);
 
     // Add tabs: Command and Logs
-    QTextEdit* commandTextEdit = new QTextEdit();
+    commandTextEdit = new QTextEdit();
     commandTextEdit->setPlaceholderText("Enter command here...");
 
-    QTextEdit* logsTextEdit = new QTextEdit();
+    logsTextEdit = new QTextEdit();
     logsTextEdit->setReadOnly(true);
     logsTextEdit->setPlainText("Logs will appear here...");
 
