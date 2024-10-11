@@ -89,3 +89,44 @@ void OpenGLWidget::drawPrimitives()
     glVertex2f(0.0f, 0.0f);
     glEnd();
 }
+
+void OpenGLWidget::setPoint1(const QPointF& pt) {
+    point1 = pt;
+    point1Set = true;
+}
+
+void OpenGLWidget::setPoint2(const QPointF& pt) {
+    point2 = pt;
+    point2Set = true;
+    lines.push_back({ point1, point2 });  // Store the line
+    update();  // Trigger repaint to draw the line
+}
+
+void OpenGLWidget::paintEvent(QPaintEvent* event) {
+    QOpenGLWidget::paintEvent(event);
+    QPainter painter(this);
+    painter.setRenderHint(QPainter::Antialiasing);
+
+    // Set the pen color to white for visibility against the black background
+    QPen pen(Qt::white);
+    pen.setWidth(2);  // Set line width (optional)
+    painter.setPen(pen);
+
+    // Draw all lines stored in the vector
+    for (const Line& line : lines) {
+        painter.drawLine(line.start, line.end);
+    }
+}
+
+void OpenGLWidget::mousePressEvent(QMouseEvent* event)  {
+    if (event->button() == Qt::LeftButton) {
+        emit pointPicked(event->pos());  // Emit signal when a point is picked
+    }
+    else if (event->button() == Qt::RightButton) {
+        emit repeatLineCommand();  // Right click triggers repeat of "line" command
+    }
+}
+
+
+
+

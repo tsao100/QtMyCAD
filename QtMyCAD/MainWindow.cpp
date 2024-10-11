@@ -81,6 +81,11 @@ void MainWindow::createDockableWindow()
     logsTextEdit->setReadOnly(true);
     logsTextEdit->setPlainText("Logs will appear here...");
 
+    // Set fixed heights for commandTextEdit and logsTextEdit
+    commandTextEdit->setFixedHeight(50);  // Set the height of the command window
+    logsTextEdit->setFixedHeight(100);    // Set the height of the log window
+
+
     // Add the command and logs windows to the splitter
     CMDsplitter->addWidget(logsTextEdit);
     CMDsplitter->addWidget(commandTextEdit);
@@ -92,3 +97,66 @@ void MainWindow::createDockableWindow()
     addDockWidget(Qt::BottomDockWidgetArea, dockableWindow);
 
 }
+
+void MainWindow::keyPressEvent(QKeyEvent* event)  {
+    if (event->key() == Qt::Key_Space) {
+        repeatLineCommand();  // Space bar triggers repeat of "line" command
+    }
+}
+
+void MainWindow::handleCommandInput() {
+    QString command = commandTextEdit->toPlainText().trimmed();
+
+    if (command == "line") {
+        logsTextEdit->append("line command received. Point 1:");
+        commandTextEdit->clear();
+        isLineCommand = true;
+        waitForPoint1 = true;
+    }
+}
+
+void MainWindow::handlePointPicked(const QPointF& point) {
+    if (isLineCommand) {
+        if (waitForPoint1) {
+            openGLWidget->setPoint1(point);
+            logsTextEdit->append(QString("Point 1: (%1, %2)").arg(point.x()).arg(point.y()));
+            logsTextEdit->append("Point 2:");
+            waitForPoint1 = false;
+        }
+        else {
+            openGLWidget->setPoint2(point);
+            logsTextEdit->append(QString("Point 2: (%1, %2)").arg(point.x()).arg(point.y()));
+            logsTextEdit->append("Line drawn.");
+            commandTextEdit->clear();  // Ready for new commands
+            isLineCommand = false;
+        }
+    }
+}
+
+void MainWindow::repeatLineCommand() {
+    logsTextEdit->append("Repeating line command. Point 1:");
+    isLineCommand = true;
+    waitForPoint1 = true;
+}
+
+void MainWindow::mousePressEvent(QMouseEvent* event) {
+    if (event->button() == Qt::LeftButton && isLineCommand) {
+        if (waitForPoint1) {
+            // Map the global click position to the OpenGL widget
+            QPointF point1 = openGLWidget->mapFromGlobal(event->globalPos());
+            openGLWidget->setPoint1(point1);
+            logsTextEdit->append(QString("Point 1: (%1, %2)").arg(point1.x()).arg(point1.y()));
+            logsTextEdit->append("Point 2:");
+            waitForPoint1 = false;  // Now wait for point 2
+        }
+        else {
+            QPointF point2 = openGLWidget->mapFromGlobal(event->globalPos());
+            openGLWidget->setPoint2(point2);
+            logsTextEdit->append(QString("Point 2: (%1, %2)").arg(point2.x()).arg(point2.y()));
+            logsTextEdit->append("Line drawn.");
+            commandTextEdit->clear();  // Ready for new commands
+            isLineCommand = false;  // Reset for next command
+        }
+    }
+}
+
